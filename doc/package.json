@@ -1,5 +1,5 @@
 {
-    "name": "element",
+    "name": "angular",
     "version": "0.0.0",
     "scripts": {
         "start": "npm i && npm run serve",
