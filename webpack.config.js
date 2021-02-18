@@ -32,18 +32,6 @@ module.exports = env => {
                     options: {
                         configFile: path.resolve('./tsconfig.json')
                     }
-                },
-                {
-                    test: /\.m?js$/,
-                    exclude: /(node_modules|bower_components)/,
-                    use: [
-                        {
-                            loader: 'babel-loader',
-                            options: {
-                                babelrc: true
-                            }
-                        }
-                    ]
                 }
             ]
         },

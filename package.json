@@ -5,14 +5,12 @@
     "description": "angular directives, components and utilities for master",
     "author": "Aoyue Design LTD.",
     "private": false,
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "src/index.ts",
     "files": [
-        "dist"
+        "src"
     ],
     "scripts": {
         "start": "npm i && cd doc && npm run start",
-        "pack": "npm i && webpack",
         "semantic-release": "semantic-release"
     },
     "keywords": [
