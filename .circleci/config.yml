@@ -14,5 +14,8 @@ jobs:
     steps:
       - checkout
       - run:
+          name: install
+          command: npm i
+      - run:
           name: semantic release
           command: npm run semantic-release || true
