@@ -1,0 +1,44 @@
+{
+    "name": "@master/angular",
+    "version": "0.0.1",
+    "license": "MIT",
+    "description": "angular directives, components and utilities for master",
+    "author": "Aoyue Design LTD.",
+    "private": false,
+    "keywords": [
+        "ui",
+        "typescript",
+        "angular",
+        "directive",
+        "responsive"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/master-style/angular.git"
+    },
+    "peerDependencies": {
+        "@angular/common": "^11.2.1",
+        "@angular/core": "^11.2.1"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "lodash-es": "^4.17.20",
+        "tslib": "^2.0.0"
+    },
+    "devDependencies": {
+        "semantic-release": "^17.3.8"
+    },
+    "release": {
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/github",
+            "@semantic-release/npm"
+        ]
+    },
+    "scripts": {
+        "semantic-release": "semantic-release"
+    }
+}
