@@ -1,0 +1,24 @@
+version: 2
+
+workflows:
+  version: 2
+  package:
+    jobs:
+      - pack & release:
+          context: Master
+
+jobs:
+  pack & release:
+    docker:
+      - image: 'circleci/node:latest'
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: npm i
+      - run:
+          name: build
+          command: npx webpack
+      - run:
+          name: semantic release
+          command: npm run semantic-release || true
