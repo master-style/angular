@@ -10,7 +10,7 @@ module.exports = env => {
     const entryGlob = [
         'src/**/index.{ts,js}'
     ];
-    
+
     return {
         entry: glob.sync(entryGlob).reduce((entrypoint, eachPath) => {
             const parsePath = path.parse(path.relative(path.join('./src'), eachPath));
@@ -18,7 +18,7 @@ module.exports = env => {
             entrypoint[filename] = [path.resolve(eachPath)];
             return entrypoint;
         }, {}),
-        externals: Object.keys(package.dependencies),
+        externals: Object.keys(package.dependencies).concat(Object.keys(package.devDependencies)),
         mode: 'production',
         resolve: {
             extensions: ['.js', '.ts'],

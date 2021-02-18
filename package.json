@@ -27,6 +27,7 @@
         "url": "https://github.com/master-style/element.git"
     },
     "dependencies": {
+        "@angular/forms": "^11.2.1",
         "lodash-es": "^4.17.20"
     },
     "devDependencies": {
