@@ -20,9 +20,9 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
     constructor(
         private el: ElementRef,
         private _renderer: Renderer2
-    ) {}
+    ) { }
 
-    onChange = (value: any) => {}
+    onChange = (value: any) => { }
 
     onTouched = () => { };
 
@@ -38,6 +38,10 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
 
     registerOnTouched(fn: () => any): void {
         this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this._renderer.setProperty(this.el.nativeElement, 'disabled', isDisabled);
     }
 }
 
@@ -55,5 +59,9 @@ export class OptionControlValueAccessor {
     @Input('value')
     set value(value: any) {
         this._renderer.setProperty(this.el.nativeElement, 'value', value);
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this._renderer.setProperty(this.el.nativeElement, 'disabled', isDisabled);
     }
 }

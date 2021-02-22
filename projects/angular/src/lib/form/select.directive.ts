@@ -19,9 +19,9 @@ export class SelectControlValueAccessor implements ControlValueAccessor {
     constructor(
         private el: ElementRef,
         private _renderer: Renderer2
-    ) {}
+    ) { }
 
-    onChange = (value: any) => {}
+    onChange = (value: any) => { }
 
     onTouched = () => { };
 
@@ -38,5 +38,9 @@ export class SelectControlValueAccessor implements ControlValueAccessor {
 
     registerOnTouched(fn: () => any): void {
         this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this._renderer.setProperty(this.el.nativeElement, 'disabled', isDisabled);
     }
 }
