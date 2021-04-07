@@ -1,0 +1,176 @@
+<div class="demo mb:no p:xl">
+    <form class="demo-body" #form="ngForm">
+        <div class="y">
+            <div class="x:6">
+                <div class="y">
+                    <div class="x:12">
+                        {{ multipleSelect.value | json }}
+                    </div>
+                    <div class="x:6">
+                        <m-select name="city-multiple-underlined"
+                                  label="city"
+                                  required
+                                  (change)="masterChange($event)"
+                                  multiple
+                                  searchable
+                                  #multipleSelect
+                                  placeholder="search ..."
+                                  [(ngModel)]="cities"
+                                  class="underlined">
+                            <m-option *ngFor="let city of optionalCities"
+                                      [value]="city">
+                                <span slot="head">🍉</span>{{city}}
+                            </m-option>
+                            <m-option *ngFor="let option of options"
+                                      [value]="option">
+                                <span slot="head">🍉</span>{{option}}
+                            </m-option>
+                        </m-select>
+                        {{ cities | json }}
+                    </div>
+                    <div class="x:6">
+                        <m-select name="city-multiple"
+                                  label="city"
+                                  required
+                                  (change)="masterChange($event)"
+                                  multiple
+                                  searchable
+                                  #multipleSelect
+                                  placeholder="search ..."
+                                  [(ngModel)]="cities"
+                                  class="outlined">
+                            <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien', 'taoyuan']"
+                                      [value]="city">
+                                <span slot="head">🍉</span>{{city}}
+                            </m-option>
+                            <m-option *ngFor="let option of options"
+                                      [value]="option">
+                                <span slot="head">🍉</span>{{option}}
+                            </m-option>
+                        </m-select>
+                    </div>
+                    <div class="x:6">
+                        <m-select name="city-entities"
+                                  label="city"
+                                  required
+                                  searchable
+                                  binding="id"
+                                  placeholder="search ..."
+                                  [(ngModel)]="cityEntities"
+                                  class="outlined">
+                            <m-option *ngFor="let city of [{ id: 'taipei' }, { id: 'hualien' }]"
+                                      [value]="city">
+                                <span slot="head">🍉</span>{{ city.id }}
+                            </m-option>
+                        </m-select>
+                    </div>
+                    <div class="x:12">
+                        {{ test.value }}
+                    </div>
+                    <div class="x:6">
+                        <m-select name="city"
+                                  #test
+                                  label="city"
+                                  required
+                                  addable
+                                  (add)="addOption($event)"
+                                  placeholder="current location"
+                                  searchable
+                                  (change)="masterChange($event)"
+                                  ngModel="taipei"
+                                  class="outlined">
+                            <m-option>current</m-option>
+                            <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
+                                      [value]="city">
+                                <span slot="head">🍉</span>
+                                {{city}}
+                            </m-option>
+                        </m-select>
+                    </div>
+                    <div class="x:6">
+                        <m-select name="city-underlined"
+                                  #test
+                                  label="city"
+                                  required
+                                  placeholder="current location"
+                                  searchable
+                                  (change)="masterChange($event)"
+                                  ngModel="hualien"
+                                  class="underlined">
+                            <m-option>current</m-option>
+                            <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
+                                      [value]="city">
+                                {{city}}
+                            </m-option>
+                        </m-select>
+                    </div>
+                    <div class="x" *ngFor="let theme of ['dark', 'light']">
+                        <m-check type="radio"
+                                 interface="switch"
+                                 name="theme"
+                                 [value]="theme"
+                                 ngModel
+                                 required>
+                            <label>{{ theme }}</label>
+                        </m-check>
+                    </div>
+                    <div class="x" *ngFor="let sex of ['male', 'female']">
+                        <!-- [type] 目前動態綁定的 issue 還尚未被解決 -->
+                        <m-check type="radio"
+                                 *ngIf="true"
+                                 name="sex"
+                                 [value]="sex"
+                                 ngModel
+                                 required>
+                            <label>{{ sex }}</label>
+                        </m-check>
+                    </div>
+                    <div class="x">
+                        <div class="y" ngModelGroup="color">
+                            <div class="x" *ngFor="let color of ['red', 'blue']">
+                                <m-check type="checkbox"
+                                         [name]="color"
+                                         ngModel
+                                         required>
+                                    <label>{{ color }}</label>
+                                </m-check>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="x">
+                        <m-input type="email"
+                                 name="text"
+                                 label="text"
+                                 when-valid="valid"
+                                 when-invalid="invalid"
+                                 when-warning="warning"
+                                 warning
+                                 ngModel
+                                 required
+                                 email
+                                 class="outlined">
+                        </m-input>
+                    </div>
+                    <div class="x">
+                        <m-input type="number"
+                                 name="number"
+                                 label="number"
+                                 keep-validity
+                                 read-only
+                                 tabindex="5"
+                                 ngModel
+                                 required
+                                 class="outlined">
+                        </m-input>
+                    </div>
+                </div>
+            </div>
+            <div class="x:6">
+                <!-- debug -->
+                <div class="f:xs" style="line-height: 1.5; font-family: Fira Code">
+                    {{ form.value | json }}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
