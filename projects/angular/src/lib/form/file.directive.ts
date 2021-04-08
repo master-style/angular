@@ -28,9 +28,10 @@ export class FileControlValueAccessor implements ControlValueAccessor {
     onTouched = () => { };
 
     writeValue(value: any): void {
-        this._renderer.setProperty(this.el.nativeElement, 'value', value);
+        const normalizedValue = value == null ? '' : value;
+        this._renderer.setProperty(this.el.nativeElement, 'value', normalizedValue);
     }
-
+    
     registerOnChange(fn): void {
         this.onChange = (nativeElement) => {
             fn(nativeElement.value);
