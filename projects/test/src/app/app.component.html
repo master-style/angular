@@ -171,7 +171,9 @@
                                  interface="preview"
                                  accept="image/*"
                                  label="file"
+                                 multiple
                                  [(ngModel)]="files"
+                                 (change)="uploadFile($event)"
                                  required>
                         </m-input>
                         {{ files | json }}

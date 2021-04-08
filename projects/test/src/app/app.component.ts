@@ -52,4 +52,7 @@ export class AppComponent {
         clearInterval(this.timer);
     }
 
+    uploadFile(event) {
+        console.log(event.target.value);
+    }
 }
