@@ -163,6 +163,19 @@
                                  class="outlined">
                         </m-input>
                     </div>
+                    <div class="x:12">
+                        <m-input type="file"
+                                 name="file"
+                                 class="outlined"
+                                 placeholder="Upload image"
+                                 interface="preview"
+                                 accept="image/*"
+                                 label="file"
+                                 [(ngModel)]="files"
+                                 required>
+                        </m-input>
+                        {{ files | json }}
+                    </div>
                 </div>
             </div>
             <div class="x:6">

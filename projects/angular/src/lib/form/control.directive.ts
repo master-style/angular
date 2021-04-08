@@ -1,11 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import { ɵgetDOM as getDOM } from '@angular/common';
 import { Directive, ElementRef, forwardRef, Inject, InjectionToken, Optional, Renderer2 } from '@angular/core';
 
@@ -64,7 +56,7 @@ export const COMPOSITION_BUFFER_MODE = new InjectionToken<boolean>('CompositionE
  */
 @Directive({
     selector:
-        'm-input:not([type=number])[formControlName],m-textarea[formControlName],m-input:not([type=number])[formControl],m-textarea[formControl],m-input:not([type=number])[ngModel],m-textarea[ngModel]',
+        'm-input:not([type=number]):not([type=file])[formControlName],m-textarea[formControlName],m-input:not([type=number]):not([type=file])[formControl],m-textarea[formControl],m-input:not([type=number]):not([type=file])[ngModel],m-textarea[ngModel]',
     // TODO: vsavkin replace the above selector with the one below it once
     // https://github.com/angular/angular/issues/3011 is implemented
     // selector: '[ngModel],[formControl],[formControlName]',

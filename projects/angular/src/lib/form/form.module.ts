@@ -5,9 +5,11 @@ import { DefaultValueAccessor } from './control.directive';
 import { NumberValueAccessor } from './number.directive';
 import { OptionControlValueAccessor, SelectMultipleControlValueAccessor } from './select-multiple.directive';
 import { SelectControlValueAccessor } from './select.directive';
+import { FileControlValueAccessor } from './file.directive';
 
 const SHARED_DIRECTIVES: any[] = [
     RadioControlValueAccessor,
+    FileControlValueAccessor,
     CheckboxControlValueAccessor,
     CheckboxRequiredValidator,
     DefaultValueAccessor,

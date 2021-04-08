@@ -13,7 +13,7 @@ export class AppComponent {
     options = [];
 
     cities = ['taipei', 'hualien'];
-
+    files;
     cityEntities = { id: 'taipei' }
 
     optionalCities;
