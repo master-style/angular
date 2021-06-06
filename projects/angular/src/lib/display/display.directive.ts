@@ -27,16 +27,14 @@ export class DisplayDirective {
     }
 
     resize() {
-        const width = window.outerWidth;
-
         let display = true;
 
         if (this.show) {
-            display = width >= this.displayService.options.breakpoints[this.show];
+            display = this.displayService.windowWidth >= this.displayService.options.breakpoints[this.show];
         }
 
         if (this.hide) {
-            display = width - 0.2 < this.displayService.options.breakpoints[this.hide];
+            display = this.displayService.windowWidth - 0.2 < this.displayService.options.breakpoints[this.hide];
         }
 
         if (display && !this.display) {

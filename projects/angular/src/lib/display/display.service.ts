@@ -23,23 +23,36 @@ export class DisplayService {
         @Inject(DISPLAY_OPTIONS) public options: DisplayOptions
     ) {
         this.options = merge(DEFAULT_OPTIONS, this.options);
-        this.onResize = debounce(() => this.resized.next(), this.options.debounceWait);
+        this.onResize = debounce(() => {
+            this.windowWidth = window.outerWidth;
+            this.resized.next();
+        }, this.options.debounceWait);
         window.addEventListener('resize', this.onResize, { passive: true });
+    }
+
+    #windowWidth: number;
+
+    get windowWidth() {
+        return this.#windowWidth || window.outerWidth;
+    }
+
+    set windowWidth(width: number) {
+        this.#windowWidth = width;
     }
 
     private onResize;
     resized = new Subject();
 
     isAbove(breakpoint: string): boolean {
-        return window.outerWidth >= this.options.breakpoints[breakpoint];
+        return this.windowWidth >= this.options.breakpoints[breakpoint];
     }
 
     isBelow(breakpoint: string): boolean {
-        return window.outerWidth - 0.2 < this.options.breakpoints[breakpoint];
+        return this.windowWidth - 0.2 < this.options.breakpoints[breakpoint];
     }
 
     get above() {
-        const width = window.outerWidth;
+        const width = this.windowWidth;
         let above = '';
         for (const breakpointKey in this.options.breakpoints) {
             const breakpointValue = this.options.breakpoints[breakpointKey];
@@ -57,7 +70,7 @@ export class DisplayService {
     }
 
     get below() {
-        const width = window.outerWidth;
+        const width = this.windowWidth;
         let below = '';
         for (const breakpointKey in this.options.breakpoints) {
             const breakpointValue = this.options.breakpoints[breakpointKey];
