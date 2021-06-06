@@ -19,6 +19,9 @@ export class DisplayService {
     ) {
         this.options = merge(DEFAULT_OPTIONS, this.options);
     }
+
+    above: string;
+    below: string;
 }
 
 export interface DisplayOptions {

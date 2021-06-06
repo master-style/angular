@@ -37,12 +37,17 @@ export class DisplayDirective {
 
         let display = true;
 
+        this.displayService.above = '';
+        this.displayService.below = '';
+
         if (this.show) {
-            display = display && width >= this.displayService.options.breakpoints[this.show];
+            display = width >= this.displayService.options.breakpoints[this.show];
+            this.displayService.above = display ? this.show : '';
         }
 
         if (this.hide) {
-            display = display && width - 0.2 < this.displayService.options.breakpoints[this.hide];
+            display = width - 0.2 < this.displayService.options.breakpoints[this.hide];
+            this.displayService.below = display ? this.show : '';
         }
 
         if (display && !this.display) {
@@ -54,8 +59,6 @@ export class DisplayDirective {
         }
 
         this.display = display;
-
-        console.log('updated display', this.display)
     }
 
     ngOnChanges(): void {

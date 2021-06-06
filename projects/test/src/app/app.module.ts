@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormModule } from 'projects/angular/src/lib/form';
+import { DisplayModule } from 'projects/angular/src/public-api';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AppComponent } from './app.component';
     imports: [
         BrowserModule,
         FormModule,
-        FormsModule
+        FormsModule,
+        DisplayModule.forRoot()
     ],
     bootstrap: [AppComponent],
     schemas: []
