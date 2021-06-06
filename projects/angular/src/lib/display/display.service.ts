@@ -23,17 +23,12 @@ export class DisplayService {
         @Inject(DISPLAY_OPTIONS) public options: DisplayOptions
     ) {
         this.options = merge(DEFAULT_OPTIONS, this.options);
-        this.onResize = debounce(() => this.resize(), this.options.debounceWait);
+        this.onResize = debounce(() => this.resized.next(), this.options.debounceWait);
         window.addEventListener('resize', this.onResize, { passive: true });
-        this.resize();
     }
 
     private onResize;
     resized = new Subject();
-
-    resize() {
-        this.resized.next();
-    }
 
     isAbove(breakpoint: string): boolean {
         return window.outerWidth >= this.options.breakpoints[breakpoint];
