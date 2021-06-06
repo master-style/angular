@@ -20,6 +20,7 @@
         "@master/ui": "^1.0.0-alpha.105",
         "lodash-es": "^4.17.20",
         "rxjs": "~6.6.0",
+        "ssr-window": "^3.0.0",
         "tslib": "^2.0.0",
         "zone.js": "~0.11.3"
     },

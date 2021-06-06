@@ -25,7 +25,8 @@
     },
     "dependencies": {
         "lodash-es": "^4.17.20",
-        "tslib": "^2.0.0"
+        "tslib": "^2.0.0",
+        "ssr-window": "^3.0.0"
     },
     "devDependencies": {
         "semantic-release": "^17.3.8"

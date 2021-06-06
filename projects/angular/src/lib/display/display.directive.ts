@@ -1,6 +1,9 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DisplayService } from './display.service';
+import { getWindow } from 'ssr-window';
+
+const window = getWindow();
 
 @Directive({
     selector: '[show],[hide]'

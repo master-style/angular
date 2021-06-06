@@ -2,6 +2,9 @@ import { Inject, Injectable, InjectionToken } from '@angular/core';
 import merge from 'lodash-es/merge';
 import { Subject } from 'rxjs';
 import debounce from 'lodash-es/debounce';
+import { getWindow } from 'ssr-window';
+
+const window = getWindow();
 
 const DEFAULT_OPTIONS = {
     breakpoints: {
@@ -25,11 +28,19 @@ export class DisplayService {
         this.resize();
     }
 
-    onResize;
+    private onResize;
     resized = new Subject();
 
     resize() {
         this.resized.next();
+    }
+
+    isAbove(breakpoint: string): boolean {
+        return window.outerWidth >= this.options.breakpoints[breakpoint];
+    }
+
+    isBelow(breakpoint: string): boolean {
+        return window.outerWidth - 0.2 < this.options.breakpoints[breakpoint];
     }
 
     get above() {

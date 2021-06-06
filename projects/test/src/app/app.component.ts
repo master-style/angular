@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DisplayService } from 'projects/angular/src/public-api';
 
 @Component({
     selector: 'app-root',
@@ -6,7 +7,10 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    constructor() { }
+
+    constructor(
+        public displayService: DisplayService
+    ) { }
 
     timer;
 
@@ -55,4 +59,5 @@ export class AppComponent {
     uploadFile(event) {
         console.log(event.target.value);
     }
+
 }
