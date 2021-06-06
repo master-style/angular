@@ -1,6 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-
-import debounce from 'lodash-es/debounce';
+import { Subscription } from 'rxjs';
 import { DisplayService } from './display.service';
 
 @Directive({
@@ -11,43 +10,30 @@ export class DisplayDirective {
     @Input() show: string;
     @Input() hide: string;
 
-    display;
-    resize;
+    display: boolean;
+    subscriptions: Subscription[] = [];
 
     constructor(
         private viewContainerRef: ViewContainerRef,
         private templateRef: TemplateRef<any>,
         private displayService: DisplayService
     ) {
-        this.resize = debounce(() => this.update(), this.displayService.options.debounceWait);
+        this.subscriptions.push(
+            this.displayService.resized.subscribe(() => this.resize())
+        )
     }
 
-    ngOnInit(): void {
-        window.addEventListener('resize', this.resize, { passive: true })
-    }
-
-    ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        window.removeEventListener('resize', this.resize);
-    }
-
-    update() {
+    resize() {
         const width = window.outerWidth;
 
         let display = true;
 
-        this.displayService.above = '';
-        this.displayService.below = '';
-
         if (this.show) {
             display = width >= this.displayService.options.breakpoints[this.show];
-            this.displayService.above = display ? this.show : '';
         }
 
         if (this.hide) {
             display = width - 0.2 < this.displayService.options.breakpoints[this.hide];
-            this.displayService.below = display ? this.show : '';
         }
 
         if (display && !this.display) {
@@ -62,6 +48,10 @@ export class DisplayDirective {
     }
 
     ngOnChanges(): void {
-        this.update();
+        this.resize();
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe());
     }
 }

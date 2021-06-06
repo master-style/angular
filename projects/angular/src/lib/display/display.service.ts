@@ -1,5 +1,7 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import merge from 'lodash-es/merge';
+import { Subject } from 'rxjs';
+import debounce from 'lodash-es/debounce';
 
 const DEFAULT_OPTIONS = {
     breakpoints: {
@@ -18,10 +20,53 @@ export class DisplayService {
         @Inject(DISPLAY_OPTIONS) public options: DisplayOptions
     ) {
         this.options = merge(DEFAULT_OPTIONS, this.options);
+        this.onResize = debounce(() => this.resize(), this.options.debounceWait);
+        window.addEventListener('resize', this.onResize, { passive: true });
+        this.resize();
     }
 
-    above: string;
-    below: string;
+    onResize;
+    resized = new Subject();
+
+    resize() {
+        this.resized.next();
+    }
+
+    get above() {
+        const width = window.outerWidth;
+        let above = '';
+        for (const breakpointKey in this.options.breakpoints) {
+            const breakpointValue = this.options.breakpoints[breakpointKey];
+            if (width >= breakpointValue) {
+                if (above) {
+                    if (breakpointValue > this.options.breakpoints[above]) {
+                        above = breakpointKey;
+                    }
+                } else {
+                    above = breakpointKey;
+                }
+            }
+        }
+        return above;
+    }
+
+    get below() {
+        const width = window.outerWidth;
+        let below = '';
+        for (const breakpointKey in this.options.breakpoints) {
+            const breakpointValue = this.options.breakpoints[breakpointKey];
+            if (width - 0.2 < breakpointValue) {
+                if (below) {
+                    if (breakpointValue < this.options.breakpoints[below]) {
+                        below = breakpointKey;
+                    }
+                } else {
+                    below = breakpointKey;
+                }
+            }
+        }
+        return below;
+    }
 }
 
 export interface DisplayOptions {
